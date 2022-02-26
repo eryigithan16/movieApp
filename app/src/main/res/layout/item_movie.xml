@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="180dp">
+
+    <ImageView
+        android:id="@+id/movieImage"
+        android:layout_width="140dp"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp"
+        app:layout_constraintStart_toEndOf="@id/movieImage">
+        <TextView
+            android:id="@+id/movieTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Film adı"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textSize="20sp"
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:id="@+id/movieGenre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Film Türü"
+            android:fontFamily="@font/ubuntu_regular"
+            android:textSize="18sp"
+            android:layout_marginBottom="7dp"/>
+        <TextView
+            android:id="@+id/moviePlot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Film Özeti"
+            android:fontFamily="@font/ubuntu_regular"
+            android:textSize="13sp"/>
+    </LinearLayout>
+
+</LinearLayout>
+</layout>
