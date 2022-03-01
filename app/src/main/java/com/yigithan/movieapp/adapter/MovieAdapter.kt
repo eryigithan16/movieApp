@@ -1,6 +1,5 @@
 package com.yigithan.movieapp.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import com.yigithan.movieapp.util.placeHolderProgressBar
 import com.yigithan.movieapp.view.HomeFragmentDirections
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieAdapter(var movie: Movie?):RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(var movieList: ArrayList<Movie>):RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     class MovieViewHolder(var view: View) : RecyclerView.ViewHolder(view){
     }
@@ -25,25 +24,24 @@ class MovieAdapter(var movie: Movie?):RecyclerView.Adapter<MovieAdapter.MovieVie
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        if (movie != null){
-            holder.view.movieTitle.text = movie!!.movieName
-            holder.view.movieGenre.text = movie!!.movieGenre
-            holder.view.moviePlot.text = movie!!.moviePlot
-            holder.view.movieImage.downloadFromUrl(movie!!.moviePhoto, placeHolderProgressBar(holder.view.context))
+        holder.view.tvMovieTitle.text = movieList[position].movieName
+        holder.view.tvMovieYear.text = movieList[position].movieYear
+        holder.view.ivMovieImage.downloadFromUrl(movieList[position].moviePhoto, placeHolderProgressBar(holder.view.context))
 
-            holder.view.setOnClickListener {
-                val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(movie!!)
-                Navigation.findNavController(it).navigate(action)
-            }
+        holder.view.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(movieList[position].movieName)
+            Navigation.findNavController(it).navigate(action)
         }
+        holder.view.tvMovieTitle.isSelected = true
     }
 
     override fun getItemCount(): Int {
-        return 1
+        return movieList.size
     }
 
-    fun updateMovieList(newMovie:Movie){
-        movie = newMovie
+    fun updateMovieList(newMovieList : List<Movie>){
+        movieList.clear()
+        movieList.addAll(newMovieList)
         notifyDataSetChanged()
     }
 }

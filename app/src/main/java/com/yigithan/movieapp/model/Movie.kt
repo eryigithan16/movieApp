@@ -22,4 +22,6 @@ data class Movie(
     var movieImdb: String?,
     @SerializedName("Poster")
     var moviePhoto: String?,
+    @SerializedName("imdbId")
+    var movieId: String?,
 ) : Parcelable

@@ -7,12 +7,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.yigithan.movieapp.R
 
-//Extension
-
+//Extension for image
 fun ImageView.downloadFromUrl(url:String?, progressDrawable: CircularProgressDrawable){
     val options = RequestOptions()
         .placeholder(progressDrawable)
-        .error(R.mipmap.ic_launcher_round)
+        .error(R.drawable.ic_image_error)
     Glide.with(context)
         .setDefaultRequestOptions(options)
         .load(url)

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Movievio</string>
+    <string name="detail_error">Sorry, we couldn\'t find the movie detail you were looking for.</string>
+    <string name="home_error">Sorry, we couldn\'t find the movie you were looking for.</string>
 </resources>

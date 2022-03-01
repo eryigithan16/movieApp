@@ -16,43 +16,37 @@ class HomeViewModel : ViewModel() {
     private val movieApiService = MovieAPIService()
     private val disposable = CompositeDisposable()
 
-    val movies = MutableLiveData<Movie>()
+    val movies = MutableLiveData<List<Movie>>()
     val movieError = MutableLiveData<Boolean>()
     val movieLoading = MutableLiveData<Boolean>()
 
-    fun showData(searchText: String?){
-        getDataFromAPI(searchText!!)
+    fun showMovieList(searchText: String?){
+        getMovieListFromAPI(searchText!!)
     }
 
-    private fun getDataFromAPI(searchText:String?) {
+    private fun getMovieListFromAPI(searchText:String?) {
         movieLoading.value = true
-
         disposable.add(
-            movieApiService.getData(searchText)
+            movieApiService.getDataList(searchText)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<Movie>(){
-                    override fun onSuccess(t: Movie) {
-                        if(t.movieName==null){
+                .subscribeWith(object : DisposableSingleObserver<Search>(){
+                    override fun onSuccess(t: Search) {
+                        if(t.resultSearch.isNullOrEmpty()){
                             movieError.value = true
                             movieLoading.value = false
                         }
                         else{
-                            movies.value = t
+                            movies.value = t.resultSearch
                             movieError.value = false
                             movieLoading.value = false
                         }
-
-                        Log.e("@@@@@@1","$movies")
                     }
-
                     override fun onError(e: Throwable) {
                         movieLoading.value = false
                         movieError.value = true
                         e.printStackTrace()
-                        Log.e("@@@@@@","gelmedi homeviewmodel")
                     }
-
                 })
         )
     }
@@ -61,5 +55,4 @@ class HomeViewModel : ViewModel() {
         super.onCleared()
         disposable.clear()
     }
-
 }

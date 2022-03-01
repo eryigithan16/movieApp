@@ -18,6 +18,11 @@ class MovieAPIService {
         .create(MovieAPI::class.java)
 
     fun getData(searchText:String?) : Single<Movie>{
-        return api.getMovies(searchText!!)
+        return api.getMovie(searchText!!)
     }
+
+    fun getDataList(searchText:String?) : Single<Search>{
+        return api.getSearchMovies(searchText!!)
+    }
+
 }
