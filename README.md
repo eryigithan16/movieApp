@@ -13,7 +13,7 @@ Movievio
 - Navigation
 - Splash Screen with Lottie
 ## Uygulama Ekran Görüntüleri
-![image](https://github.com/eryigithan16/movieApp/blob/main/app/src/main/res/screenshots/fotosplash.png)
+![alt text](https://github.com/eryigithan16/movieApp/blob/main/app/src/main/res/screenshots/fotosplash.png?raw=true)
 ![image](https://github.com/eryigithan16/newsApp/blob/main/app/src/main/res/screenshots/ekran-newslist.png)
 ![image](https://github.com/eryigithan16/newsApp/blob/main/app/src/main/res/screenshots/ekran-detail.png)
 ![image](https://github.com/eryigithan16/newsApp/blob/main/app/src/main/res/screenshots/ekran-favorites.png)
