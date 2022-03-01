@@ -10,28 +10,23 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.yigithan.movieapp.R
 import com.yigithan.movieapp.adapter.MovieAdapter
+import com.yigithan.movieapp.databinding.FragmentHomeBinding
 import com.yigithan.movieapp.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var viewModel: HomeViewModel
     private val movieAdapter = MovieAdapter(arrayListOf())
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
+    private lateinit var binding : FragmentHomeBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        binding = FragmentHomeBinding.bind(view)
 
-        buttonSearch.setOnClickListener {
-            viewModel.showMovieList(etSearch.text.toString())
+        binding.buttonSearch.setOnClickListener {
+            viewModel.showMovieList(binding.etSearch.text.toString())
         }
-
         moviesRecyclerView.layoutManager = GridLayoutManager(context,2)
         moviesRecyclerView.adapter = movieAdapter
         observeLiveData()
@@ -40,29 +35,29 @@ class HomeFragment : Fragment() {
     fun observeLiveData(){
         viewModel.movies.observe(viewLifecycleOwner, Observer {
             it?.let {
-                moviesRecyclerView.visibility = View.VISIBLE
+                binding.moviesRecyclerView.visibility = View.VISIBLE
                 movieAdapter.updateMovieList(it)
             }
         })
         viewModel.movieError.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it){
-                    tvError.visibility = View.VISIBLE
+                    binding.tvError.visibility = View.VISIBLE
                 }
                 else{
-                    tvError.visibility = View.GONE
+                    binding.tvError.visibility = View.GONE
                 }
             }
         })
         viewModel.movieLoading.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it){
-                    pbLoading.visibility = View.VISIBLE
-                    moviesRecyclerView.visibility = View.GONE
-                    tvError.visibility = View.GONE
+                    binding.pbLoading.visibility = View.VISIBLE
+                    binding.moviesRecyclerView.visibility = View.GONE
+                    binding.tvError.visibility = View.GONE
                 }
                 else{
-                    pbLoading.visibility = View.GONE
+                    binding.pbLoading.visibility = View.GONE
                 }
             }
         })
